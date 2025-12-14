@@ -216,7 +216,9 @@ public class SpellBookManager {
     }
 
     public void addSpellItem(EntityMaid maid, ItemStack itemStack) {
+        LOGGER.debug("Adding spell item for maid {}", maid.getUUID());
         for(ISpellBookProvider<?,?> provider : getProviders()) {
+            LOGGER.debug("Adding spell item for provider: {}", provider);
             provider.handleItemStack(maid, itemStack, true);
         }
     }

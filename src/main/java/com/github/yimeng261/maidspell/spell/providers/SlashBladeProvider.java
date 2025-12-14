@@ -656,6 +656,7 @@ public class SlashBladeProvider extends ISpellBookProvider<MaidSlashBladeData, R
     
     @Override
     public boolean isSpellBook(ItemStack itemStack) {
+//        LOGGER.debug("[MaidSpell] Judge if SlashBlade: itemStack = {}, is SlashBlade = {}", itemStack, itemStack.getItem() instanceof ItemSlashBlade);
         return itemStack != null && !itemStack.isEmpty() && itemStack.getItem() instanceof ItemSlashBlade;
     }
 

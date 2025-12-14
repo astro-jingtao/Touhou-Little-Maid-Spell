@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
+
 /**
  * 法术书提供者抽象类
  * 用于支持不同模组的法术书系统
@@ -106,6 +108,8 @@ public abstract class ISpellBookProvider<T extends IMaidSpellData, S> {
      * 执行法术施放
      */
     public void castSpell(EntityMaid entityMaid){
+        LOGGER.debug("[MaidSpell] castSpell: maid={}, books={}, isCasting={}",
+                entityMaid, getData(entityMaid).getSpellBooks(), getData(entityMaid).isCasting());
         IMaidSpellData spellData = getData(entityMaid);
         if(spellData.getSpellBooks().isEmpty() || spellData.isCasting()){
             return;

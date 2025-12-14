@@ -203,11 +203,15 @@ public class MaidSpellEventHandler {
             if (!maid.level().isClientSide()) {
                 SpellBookManager manager = SpellBookManager.getOrCreateManager(maid);
                 LOGGER.debug("[MaidSpell] from: {}, to: {}",event.getFrom(), event.getTo());
-                if(event.getTo() != ItemStack.EMPTY){
-                    manager.addSpellItem(maid,event.getTo());
-                }
+                // 先 remove 再 add
+                // 避免类似 from [1 slashblade] to [1 slashblade] 时
+                // add 因为已存在 slashblade 而失败
+                // remove 又将已存在的 slashblade 移除
                 if(event.getFrom() != ItemStack.EMPTY){
                     manager.removeSpellItem(maid,event.getFrom());
+                }
+                if(event.getTo() != ItemStack.EMPTY){
+                    manager.addSpellItem(maid,event.getTo());
                 }
             }
         }

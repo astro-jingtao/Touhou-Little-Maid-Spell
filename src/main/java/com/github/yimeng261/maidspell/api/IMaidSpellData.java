@@ -67,12 +67,14 @@ public abstract class IMaidSpellData {
         }
         spellBooks.add(spellBook);
         spellBookKinds.add(spellBook.getItem().getClass());
+        LOGGER.debug("[MaidSpell] SpellBook added: spellBooks={}, spellBookKinds={}", spellBooks, spellBookKinds);
     }
 
     protected boolean canAddSpellBook(ItemStack spellBook) {
         Class<?> spellBookClass = spellBook.getItem().getClass();
         for(Class<?> spellBookKind : spellBookKinds) {
             if(spellBookKind.isAssignableFrom(spellBookClass)||spellBookClass.isAssignableFrom(spellBookKind)) {
+                LOGGER.debug("[MaidSpell] Spell book can not be added. spellBookKinds = {}, spellBookClass = {}", spellBookKind, spellBookClass);
                 return false;
             }
         }
